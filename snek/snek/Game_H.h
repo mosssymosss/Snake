@@ -8,21 +8,25 @@
 #include <iomanip>
 #include <vector>
 
+
 class Game
 {
 public:
 	Game();
 	Game(int, int);
 
-	void play();
+	
 
 	void print(); //delete later
+	void play();
 private:
 	
 	void draw();
 	void update();
+	void clear();
 
 private:
+
 	Snake snek;
 	std::vector<std::vector<char>> board;
 	int width;

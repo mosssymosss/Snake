@@ -42,7 +42,7 @@ std::pair<int, int> Snake::_getHeadCoords()
 	return head_coords;
 }
 
-std::vector<std::pair<int, int>> Snake::_getTail()
+std::deque<std::pair<int, int>> Snake::_getTail()
 {
 	return tail;
 }
@@ -50,4 +50,37 @@ std::vector<std::pair<int, int>> Snake::_getTail()
 int Snake::_getLenght()
 {
 	return lenght;
+}
+
+int Snake::_getDirection()
+{
+	return direction;
+}
+
+void Snake::_setDirection(int x)
+{
+	direction = x;
+}
+
+void Snake::snek_update()
+{
+	tail.push_front(head_coords);
+	tail.pop_back();
+	switch (direction)
+	{
+	case 1:
+		head_coords.second = head_coords.second - 1;
+		break;
+	case 2:
+		head_coords.first = head_coords.first + 1;
+		break;
+	case 3:
+		head_coords.second = head_coords.second + 1;
+		break;
+	case 4:
+		head_coords.first = head_coords.first - 1;
+		break;
+	default:
+		break;
+	}
 }

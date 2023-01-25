@@ -7,8 +7,8 @@
 
 int main()
 {
-	Game game(70,20);
-	game.print();
+	Game game;
+	game.play();
 	
 
 	return 0;

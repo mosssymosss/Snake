@@ -2,7 +2,7 @@
 #define SNAKE_H
 
 #include <iostream>
-#include <vector>
+#include <deque>
 
 
 class Snake
@@ -12,8 +12,12 @@ public:
 	Snake(int, int);
 
 	std::pair<int, int> _getHeadCoords();
-	std::vector<std::pair<int, int>> _getTail();
+	std::deque<std::pair<int, int>> _getTail();
 	int _getLenght();
+	int _getDirection();
+	void _setDirection(int);
+
+	void snek_update();
 
 	void operator = (Snake const& obj);
 private:
@@ -21,7 +25,7 @@ private:
 	int speed;
 	int direction;
 	int lenght;
-	std::vector<std::pair<int, int>> tail;
+	std::deque<std::pair<int, int>> tail;
 };
 
 #endif
