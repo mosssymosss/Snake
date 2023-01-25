@@ -1,0 +1,4 @@
+*.db
+*.db-dhm
+*.db-wal
+*.opendb
