@@ -1,8 +1,9 @@
 ﻿#include "Game_H.h"
+#include "Snake_H.h"
 
 Game::Game()
-	:width(20)
-	,height(20)
+	:width(25)
+	,height(25)
 {
 	draw();
 }
@@ -39,8 +40,16 @@ void Game::draw()
 		}
 		board.push_back(temp);
 	}
+	board[snek._getHeadCoords().second][snek._getHeadCoords().first] = '@';
+	std::vector<std::pair<int, int>> temp = snek._getTail();
+	for (int i = 0; i < snek._getLenght(); ++i)
+	{
+		board[temp[i].second][temp[i].first] = '*';
+	}
 }
 
+
+/////////////////////////////////////////////////////////
 void Game::print()
 {
 	for (int i = 0; i < height; ++i)
