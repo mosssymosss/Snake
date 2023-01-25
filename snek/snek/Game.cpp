@@ -1,6 +1,8 @@
 ﻿#include "Game_H.h"
 #include "Snake_H.h"
 
+
+
 Game::Game()
 	:width(25)
 	,height(25)
@@ -12,6 +14,8 @@ Game::Game(int x, int y)
 	:width(x)
 	,height(y)
 {
+	Snake temp(x / 2, 4);
+	snek = temp;
 	draw();
 }
 
@@ -60,4 +64,5 @@ void Game::print()
 		}
 		std::cout << std::endl;
 	}
+	
 }

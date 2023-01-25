@@ -15,6 +15,7 @@ public:
 	std::vector<std::pair<int, int>> _getTail();
 	int _getLenght();
 
+	void operator = (Snake const& obj);
 private:
 	std::pair<int, int> head_coords;
 	int speed;

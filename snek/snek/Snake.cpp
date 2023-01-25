@@ -11,10 +11,10 @@ Snake::Snake()
 	,direction(3)
 	,lenght(2)
 {
-	head_coords = {11,4};
+	head_coords = {12,3};
 	tail.resize(lenght); //xz
-	tail[0] = { 11,3 };
-	tail[1] = { 11,2 };
+	tail[0] = { 12,2 };
+	tail[1] = { 12,1 };
 }
 
 Snake::Snake(int x, int y)
@@ -22,10 +22,19 @@ Snake::Snake(int x, int y)
 	,direction(3)
 	,lenght(2)
 {
-	head_coords = { x,y };
+	head_coords = { x , y };
 	tail.resize(lenght);
-	tail[0] = { x, y - 1 };
-	tail[1] = { x, y - 2 };
+	tail[0] = { x , y - 1 };
+	tail[1] = { x , y - 2 };
+}
+
+void Snake::operator = (Snake const& obj)
+{
+	this->head_coords = obj.head_coords;
+	this->speed = obj.speed;
+	this->direction = obj.direction;
+	this->lenght = obj.lenght;
+	this->tail = obj.tail;
 }
 
 std::pair<int, int> Snake::_getHeadCoords()
