@@ -145,6 +145,7 @@
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Directions_H.h" />
     <ClInclude Include="Food_H.h" />
     <ClInclude Include="Game_H.h" />
     <ClInclude Include="Snake_H.h" />

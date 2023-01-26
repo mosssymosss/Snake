@@ -1,5 +1,6 @@
 ﻿#include "Game_H.h"
 #include "Snake_H.h"
+#include "Directions_H.h"
 
 #include <stdlib.h>
 #include <conio.h>
@@ -46,21 +47,20 @@ void Game::draw()
 		}
 		board.push_back(temp);
 	}
-	board[snek._getHeadCoords().second][snek._getHeadCoords().first] = '@';
-	std::deque<std::pair<int, int>> temp = snek._getTail();
-	for (int i = 0; i < snek._getLenght(); ++i)
+	board[snek.getHeadCoords().second][snek.getHeadCoords().first] = '@';
+	std::list<std::pair<int, int>> temp = snek.getTail();
+	for (auto it = temp.begin(); it != temp.end(); ++it)
 	{
-		board[temp[i].second][temp[i].first] = '*';
+		board[it->second][it->first] = '*';
 	}
 }
 
 
 void Game::play()
 {
-	bool game_over = false;
 	while (!game_over)
 	{
-		print();
+		print_board();
 		update();
 		std::system("cls");
 	}
@@ -71,29 +71,30 @@ void Game::update()
 	char press = ' ';
 	if(_kbhit())
 		press = _getch();
-	int dir = snek._getDirection();
+	int dir = snek.getDirection();
 	switch (press)
 	{
 	case 'w':
-		if (dir != 3)
-			snek._setDirection(1);
+		if (dir != Direction::DOWN)
+			snek.setDirection(Direction::UP);
 		break;
 	case 'd':
-		if (dir != 4)
-			snek._setDirection(2);
+		if (dir != Direction::LEFT)
+			snek.setDirection(Direction::RIGHT);
 		break;
 	case 's':
-		if (dir != 1)
-			snek._setDirection(3);
+		if (dir != Direction::UP)
+			snek.setDirection(Direction::DOWN);
 		break;
 	case 'a':
-		if (dir != 2)
-			snek._setDirection(4);
+		if (dir != Direction::RIGHT)
+			snek.setDirection(Direction::LEFT);
 		break;
 	default:
 		break;
 	}
 	snek.snek_update();
+	game_over = snek.colided();
 	clear();
 	draw();
 
@@ -101,15 +102,15 @@ void Game::update()
 
 void Game::clear()
 {
-	for (int i = 0; i < height; ++i)
+	for (auto& row:board)
 	{
-		board[i].clear();
+		row.clear();
 	}
 	board.clear();
 }
 
 /////////////////////////////////////////////////////////
-void Game::print()
+void Game::print_board()
 {
 
 	for (int i = 0; i < height; ++i)
