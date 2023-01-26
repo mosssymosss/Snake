@@ -1,63 +1,54 @@
 ﻿#include "Snake_H.h"
-
-/*
-	1				w				↑
-4		2		a		d		←		→
-	3				s				↓
-*/
+#include "Directions_H.h"
 
 Snake::Snake()
-	:speed(1)
-	,direction(3)
+	:direction(Direction::DOWN)
 	,lenght(2)
 {
 	head_coords = {12,3};
-	tail.resize(lenght); //xz
-	tail[0] = { 12,2 };
-	tail[1] = { 12,1 };
+	tail.push_back(std::make_pair(12, 2));
+	tail.push_back(std::make_pair(12, 1));
 }
 
 Snake::Snake(int x, int y)
-	:speed(1)
-	,direction(3)
+	:direction(Direction::DOWN)
 	,lenght(2)
 {
 	head_coords = { x , y };
 	tail.resize(lenght);
-	tail[0] = { x , y - 1 };
-	tail[1] = { x , y - 2 };
+	tail.push_back(std::make_pair(x, y-1));
+	tail.push_back(std::make_pair(x, y-2));
 }
 
 void Snake::operator = (Snake const& obj)
 {
 	this->head_coords = obj.head_coords;
-	this->speed = obj.speed;
 	this->direction = obj.direction;
 	this->lenght = obj.lenght;
 	this->tail = obj.tail;
 }
 
-std::pair<int, int> Snake::_getHeadCoords()
+std::pair<int, int> Snake::getHeadCoords()
 {
 	return head_coords;
 }
 
-std::deque<std::pair<int, int>> Snake::_getTail()
+std::list<std::pair<int, int>> Snake::getTail()
 {
 	return tail;
 }
 
-int Snake::_getLenght()
+int Snake::getLenght()
 {
 	return lenght;
 }
 
-int Snake::_getDirection()
+int Snake::getDirection()
 {
 	return direction;
 }
 
-void Snake::_setDirection(int x)
+void Snake::setDirection(int x)
 {
 	direction = x;
 }
@@ -68,19 +59,24 @@ void Snake::snek_update()
 	tail.pop_back();
 	switch (direction)
 	{
-	case 1:
+	case Direction::UP:
 		head_coords.second = head_coords.second - 1;
 		break;
-	case 2:
+	case Direction::RIGHT:
 		head_coords.first = head_coords.first + 1;
 		break;
-	case 3:
+	case Direction::DOWN:
 		head_coords.second = head_coords.second + 1;
 		break;
-	case 4:
+	case Direction::LEFT:
 		head_coords.first = head_coords.first - 1;
 		break;
 	default:
 		break;
 	}
+}
+
+bool Snake::colided()
+{
+	return false;
 }
