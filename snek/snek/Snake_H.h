@@ -18,7 +18,7 @@ public:
 	void setDirection(int);
 
 	void snek_update();
-	bool colided();
+	bool colided(int, int);
 
 
 	void operator = (Snake const& obj);

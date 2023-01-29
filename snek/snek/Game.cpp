@@ -7,14 +7,18 @@
 #include <iostream>
 
 Game::Game()
-	:width(25)
+	:game_over(false)
+	,score(0)
+	,width(25)
 	,height(25)
 {
 	draw();
 }
 
 Game::Game(int x, int y)
-	:width(x)
+	:game_over(false)
+	,score(0)
+	,width(x)
 	,height(y)
 {
 	Snake temp(x / 2, 4);
@@ -47,12 +51,13 @@ void Game::draw()
 		}
 		board.push_back(temp);
 	}
-	board[snek.getHeadCoords().second][snek.getHeadCoords().first] = '@';
+	board[snek.getHeadCoords().second][snek.getHeadCoords().first] = 'X';
 	std::list<std::pair<int, int>> temp = snek.getTail();
 	for (auto it = temp.begin(); it != temp.end(); ++it)
 	{
 		board[it->second][it->first] = '*';
 	}
+	
 }
 
 
@@ -64,6 +69,7 @@ void Game::play()
 		update();
 		std::system("cls");
 	}
+	std::cout << "GAME OVER" << std::endl << "Final Score: " << score << std::endl;
 }
 
 void Game::update()
@@ -94,7 +100,8 @@ void Game::update()
 		break;
 	}
 	snek.snek_update();
-	game_over = snek.colided();
+	game_over = snek.colided(width, height);
+	++score;
 	clear();
 	draw();
 
@@ -121,5 +128,5 @@ void Game::print_board()
 		}
 		std::cout << std::endl;
 	}
-	
+	std::cout << std::endl << "Score:  " << score << std::endl;
 }

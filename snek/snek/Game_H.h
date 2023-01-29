@@ -15,8 +15,6 @@ public:
 	Game();
 	Game(int, int);
 
-	
-
 	void print_board();
 	void play();
 private:
@@ -27,7 +25,8 @@ private:
 
 private:
 
-	bool game_over = false;
+	bool game_over;
+	int score;
 	Snake snek;
 	std::vector<std::vector<char>> board;
 	int width;

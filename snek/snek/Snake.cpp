@@ -76,7 +76,11 @@ void Snake::snek_update()
 	}
 }
 
-bool Snake::colided()
+bool Snake::colided(int width, int height)
 {
+	if (head_coords.first <= 0 || head_coords.first >= width - 1 || head_coords.second <= 0 || head_coords.second >= height - 1)
+	{
+		return true;
+	}
 	return false;
 }
